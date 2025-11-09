@@ -80,7 +80,7 @@
         }
         window.onload = () => {
             update();
-            requestAnimationFrame(draw);
+            draw();
         }
 
         function random(min, max) {
@@ -104,15 +104,14 @@
             objects = [];
             for (let i = 0; i < count; i++) {
                 const c = mixRGB([0, 0, 255], [200, 0, 255], random(0, 1));
-                const maxR = Math.min(canvas.width, canvas.height) * 0.6;
                 objects.push({
                     x: random(0 + 100, canvas.width - 100),
                     y: random(0 + 100, canvas.height - 100),
-                    r: random(maxR * 0.15, maxR * 0.35),
+                    r: random(200, 250),
                     d: Math.random() * 360,
                     ld: Date.now(),
                     c: `rgba(${c[0]}, ${c[1]}, ${c[2]}, 0.45)`,
-                    s: random(0.2, 1.6)
+                    s: random(0.5, 1.5)
                 });
             }
         }
@@ -144,7 +143,9 @@
                 o.x += Math.cos(o.d * (Math.PI / 180)) * o.s;
                 o.y += Math.sin(o.d * (Math.PI / 180)) * o.s;
             }
-            requestAnimationFrame(draw);
+            setTimeout(() => {
+                draw();
+            }, 25);
         }
 
         (function () {
